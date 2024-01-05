@@ -5,10 +5,8 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
-module.exports =  defineConfig({
-  publicPath: '/testV4/',
-})
 export default defineConfig({
+  publicPath: process.env.NODE_ENV === "production" ? "/testV2/" : "/",
   plugins: [
     vue(),
     vueJsx(),
