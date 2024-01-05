@@ -1,85 +1,85 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="theme-switcher">
+    <label for="theme-switch">Темная тема</label>
+    <input type="checkbox" id="theme-switch" v-model="isDarkTheme" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div :class="{ 'datetime-picker': true, 'dark-theme': isDarkTheme }">
+      <label for="date">Выберите дату:</label>
+      <input
+          type="date"
+          id="date"
+          v-model="selectedDate"
+          :class="{ 'date-input': true, 'dark-input': isDarkTheme }"
+      />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <label for="time">Выберите время:</label>
+      <input
+          type="time"
+          id="time"
+          v-model="selectedTime"
+          :class="{ 'time-input': true, 'dark-input': isDarkTheme }"
+      />
+
+      <p>Выбранная дата: {{ selectedDate }}</p>
+      <p>Выбранное время: {{ selectedTime }}</p>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+<script>
+export default {
+  data() {
+    return {
+      selectedDate: '',
+      selectedTime: '',
+      isDarkTheme: false
+    }
   }
+}
+</script>
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+<style>
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --input-bg-color: #ffffff;
+  --input-border-color: #d7d7d7;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.dark-theme {
+  --bg-color: #1e1e1e;
+  --text-color: #ffffff;
+  --input-bg-color: #2d2d2d;
+  --input-border-color: #373737;
+}
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+.datetime-picker {
+  font-family: 'Arial', sans-serif;
+  border: 1px solid var(--input-border-color);
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
 
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.date-input,
+.time-input {
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+}
+
+.date-input:focus,
+.time-input:focus {
+  outline: none;
+  border-color: #4e8cff;
+}
+
+.dark-input {
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
 }
 </style>
